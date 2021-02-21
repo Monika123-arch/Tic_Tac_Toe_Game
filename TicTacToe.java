@@ -1,6 +1,5 @@
 import java.util.*;
 public class TicTacToe {
-	
 	//Static Variables
 	public static char[] board = new char[10];
 	public static char userChoice, compChoice; 	
@@ -12,7 +11,6 @@ public class TicTacToe {
 			board[i] = ' ';
 		}
 	}
-
 	//playerChoice() method to choose User's and Computer's choice of X and O
 	public static void playerChoice() {
 		Scanner sc = new Scanner(System.in);
@@ -230,6 +228,14 @@ public class TicTacToe {
                 return null;
             }
         }
+        }
+        /* In case of No-Winner the e check for anu any empty cells in the board, if they are present we
+        return null else we return the game is a draw */
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == ' ') {
+                return null;
+            }
+        }
         return "draw";
     }
 
@@ -245,15 +251,15 @@ public class TicTacToe {
             System.exit(0);
         }
     }
-
-
-
 	public static void main(String[] args) {
 		String winner = null;
 		createBoard();
 		playerChoice();
 		displayBoard();
 		boolean turn = toss();
+    
+	public static void main(String[] args) {
+		String winner = null;
         if (turn){
             while (winner == null) {
                 playerMove();
@@ -279,6 +285,7 @@ public class TicTacToe {
                 winner = checkWinner();
                 printWinner(winner);
             }
+
         }		
-	}
+     }
 }
