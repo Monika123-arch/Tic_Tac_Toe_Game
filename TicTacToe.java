@@ -1,6 +1,5 @@
 import java.util.*;
 public class TicTacToe {
-	
 	//Static Variables
 	public static char[] board = new char[10];
 	public static char userChoice, compChoice; 	
@@ -272,21 +271,6 @@ public class TicTacToe {
             }
         }
 
-        if (win){
-        /*Only when win has yet to change as False the bellow statement is executed.
-        Taking a array of only corners available in the game board (1, 3, 4, 9)
-        Initialising a random varialble to give a position between the max length of the array */
-            int[] corners = {1, 3, 6, 9};
-            int rnd = new Random().nextInt(corners.length);
-            for (int i = 0; i < corners.length ; i++){
-                if (board[corners[rnd]] == ' ') {
-                    board[corners[rnd]] = compChoice;
-                    win = false;
-                    break;
-                }
-            }
-        }
-
         if (win) {
         /*Only when win has yet to change as False the bellow statement is executed.
         Taking a array of only corners available in the game board (5, 2, 4, 6, 8)
@@ -367,6 +351,96 @@ public class TicTacToe {
                 return "O";
             }
         }
+        }
+
+        if (win){
+        /*Only when win has yet to change as False the bellow statement is executed.
+        Taking a array of only corners available in the game board (1, 3, 4, 9)
+        Initialising a random varialble to give a position between the max length of the array */
+            int[] corners = {1, 3, 6, 9};
+            int rnd = new Random().nextInt(corners.length);
+            for (int i = 0; i < corners.length ; i++){
+                if (board[corners[rnd]] == ' ') {
+                    board[corners[rnd]] = compChoice;
+                    win = false;
+                    break;
+                }
+            }
+        }
+        /* If the win is not false from the above winning conditions then go for random
+        to generate computer to move position */
+
+		while (win) {
+			int random = (int)(Math.floor(Math.random() * 10) % 9)+1;
+				if (board[random] == ' ') {
+					board[random] = compChoice;
+					break;
+				}
+				else
+					continue;
+		}
+	}
+
+	public static boolean toss(){
+		int random = (int)Math.floor(Math.random() * 10) % 2;
+		if ( random == 0) {
+			System.out.println(userChoice + " will play first.");
+			return true;
+		}
+		else {
+			System.out.println(compChoice + " will play first.");
+			return false;
+		}
+	}
+
+    /* checkWinner() method is to check either X or O has won the game or the game is draw */
+    static String checkWinner() {
+        for (int a = 0; a < 8; a++) {
+            switch (a) {
+                case 0:
+                    line = new StringBuilder().append(board[1]).append(board[2]).append(board[3]).toString();
+                    break;
+                case 1:
+                    line = new StringBuilder().append(board[4]).append(board[5]).append(board[6]).toString();
+                    break;
+                case 2:
+                    line = new StringBuilder().append(board[7]).append(board[8]).append(board[9]).toString();
+                    break;
+                case 3:
+                    line = new StringBuilder().append(board[1]).append(board[4]).append(board[7]).toString();
+                    break;
+                case 4:
+                    line = new StringBuilder().append(board[2]).append(board[5]).append(board[8]).toString();
+                    break;
+                case 5:
+                    line = new StringBuilder().append(board[3]).append(board[6]).append(board[9]).toString();
+                    break;
+                case 6:
+                    line = new StringBuilder().append(board[1]).append(board[5]).append(board[9]).toString();
+                    break;
+                case 7:
+                    line = new StringBuilder().append(board[3]).append(board[5]).append(board[7]).toString();
+                    break;
+            }
+            //For X winner
+            if (line.equals("XXX")) {
+                return "X";
+            }
+
+            // For O winner
+            else if (line.equals("OOO")) {
+                return "O";
+            }
+        }
+        /* In case of No-Winner the e check for anu any empty cells in the board, if they are present we
+        return null else we return the game is a draw */
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == ' ') {
+                return null;
+            }
+        }
+
+        }
         /* In case of No-Winner the e check for anu any empty cells in the board, if they are present we
         return null else we return the game is a draw */
         for (int i = 0; i < board.length; i++) {
@@ -389,9 +463,6 @@ public class TicTacToe {
             System.exit(0);
         }
     }
-
-
-
 	public static void main(String[] args) {
 		String winner = null;
 		createBoard();
@@ -426,3 +497,4 @@ public class TicTacToe {
         }		
 	}
 }
+
