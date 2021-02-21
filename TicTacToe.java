@@ -270,6 +270,20 @@ public class TicTacToe {
             }
         }
 
+        if (win){
+        /*Only when win has yet to change as False the bellow statement is executed.
+        Taking a array of only corners available in the game board (1, 3, 4, 9)
+        Initialising a random varialble to give a position between the max length of the array */
+            int[] corners = {1, 3, 6, 9};
+            int rnd = new Random().nextInt(corners.length);
+            for (int i = 0; i < corners.length ; i++){
+                if (board[corners[rnd]] == ' ') {
+                    board[corners[rnd]] = compChoice;
+                    win = false;
+                    break;
+                }
+            }
+        }
         /* If the win is not false from the above winning conditions then go for random
         to generate computer to move position */
 
@@ -334,7 +348,6 @@ public class TicTacToe {
             else if (line.equals("OOO")) {
                 return "O";
             }
-
         }
         /* In case of No-Winner the e check for anu any empty cells in the board, if they are present we
         return null else we return the game is a draw */
@@ -381,8 +394,6 @@ public class TicTacToe {
 		playerChoice();
 		displayBoard();
 		boolean turn = toss();
-	public static void main(String[] args) {
-		String winner = null;
         if (turn){
             while (winner == null) {
                 playerMove();
