@@ -1,6 +1,5 @@
 import java.util.*;
 public class TicTacToe {
-	
 	//Static Variables
 	public static char[] board = new char[10];
 	public static char userChoice, compChoice; 	
@@ -34,9 +33,31 @@ public class TicTacToe {
 		System.out.println("--------------");
 		System.out.println("  " + board[7] + " | "+ board[8] + " | " + board[9] + "  ");
 	}
+	//playerMove() method to ask user input which position(1-9) he would like to play his move
+	public static void playerMove() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println(userChoice + " will play first. Enter a slot number to place "+userChoice+" in:");
+		while (true) {
+			int num = sc.nextInt();
+			if (num > 0 && num < 10) {
+				if (board[num] == ' ') {
+					board[num] = userChoice;
+					break;
+				}
+				else
+					System.out.println("Position is filled");
+			}
+			else
+				System.out.println("Not a Valid Input");
+		}
+	}
 	public static void main(String[] args) {
 		createBoard();
 		playerChoice();
+		displayBoard();
+		playerMove();
+		displayBoard();
+		playerMove();
 		displayBoard();
 	}
 }
