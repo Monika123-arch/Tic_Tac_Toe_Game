@@ -39,7 +39,7 @@ public class TicTacToe {
 	//playerMove() method  To Input Position In Board
 	public static void playerMove() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter A Slot Number To Place"+userChoice+" in:");
+		System.out.println(userChoice + " will play first. Enter a slot number to place "+userChoice+" in:");
 		while (true) {
 			int num = sc.nextInt();
 			if (num > 0 && num < 10) {
@@ -62,14 +62,111 @@ public class TicTacToe {
 	//compMove() method to play move for a computer which takes position(1-9) by the use of random
 
 	public static void compMove() {
-		while (true) {
+        // Variable always stays true if any of the winning conditions are not met
+        boolean win = true;
+        // Loop to check varios winning conditions
+        for (int i = 1; i < 10; i++) {
+            switch(i) {
+                /* Case:1 (1,2,3)(1,5,9)(1,4,7) winning conditions
+                i.e., if (2,3)(5,9)(4,7) is equal then the computer plays at position 1 */
+                case 1:
+                    if( (board[2] == compChoice && board[3] == compChoice)
+                            || (board[4] == compChoice && board[7] == compChoice)
+                            || (board[5] == compChoice && board[9] == compChoice) ) {
+                        board[i] = compChoice;
+                        win = false;
+                    }
+                    break;
+                /* Case:2 (1,2,3)(2,5,8) winning conditions
+                i.e., if (1,3)(5,8) is equal then the computer plays at position 2 */
+                case 2:
+                    if( (board[1] == compChoice && board[3] == compChoice)
+                            || (board[5] == compChoice && board[8] == compChoice) ) {
+                        board[i] = compChoice;
+                        win = false;
+                    }
+                    break;
+                /* Case:3 (1,2,3)(3,6,9)(3,5,7) winning conditions
+                i.e., if (1,2)(6,9)(5,7) is equal then the computer plays at position 3 */
+                case 3:
+                    if( (board[1] == compChoice && board[2] == compChoice)
+                            || (board[6] == compChoice && board[9] == compChoice)
+                            || (board[5] == compChoice && board[7] == compChoice) ) {
+                        board[i] = compChoice;
+                        win = false;
+                    }
+                    break;
+                /* Case:4 (4,5,6)(1,4,7) winning conditions
+                i.e., if (5,6)(1,7) is equal then the computer plays at position 4 */
+                case 4:
+                    if( (board[1] == compChoice && board[7] == compChoice)
+                            || (board[5] == compChoice && board[6] == compChoice) ) {
+                        board[i] = compChoice;
+                        win = false;
+                    }
+                    break;
+                /* Case:5 (4,5,6)(2,5,8)(1,5,9)(3,5,7) winning conditions
+                i.e., if (2,8)(1,9)(3,7)(4,6) is equal then the computer plays at position 5 */
+                case 5:
+                    if( (board[1] == compChoice && board[9] == compChoice)
+                            || (board[4] == compChoice && board[6] == compChoice)
+                            || (board[3] == compChoice && board[7] == compChoice)
+                            || (board[2] == compChoice && board[8] == compChoice) ) {
+                        board[i] = compChoice;
+                        win = false;
+                    }
+                    break;
+                /* Case:6 (4,5,6)(3,6,9) winning conditions
+                i.e., if (3,9)(4,5) is equal then the computer plays at position 6 */
+                case 6:
+                    if( (board[3] == compChoice && board[9] == compChoice)
+                            || (board[4] == compChoice && board[5] == compChoice)) {
+                        board[i] = compChoice;
+                        win = false;
+                    }
+                    break;
+                /* Case:7 (7,5,3)(7,8,9)(7,4,1) winning conditions
+                i.e., if (5,3)(8,9)(1,4) is equal then the computer plays at position 7 */
+                case 7:
+                    if( (board[1] == compChoice && board[4] == compChoice)
+                            || (board[5] == compChoice && board[3] == compChoice)
+                            || (board[8] == compChoice && board[9] == compChoice) ) {
+                        board[i] = compChoice;
+                        win = false;
+                    }
+                    break;
+                /* Case:8 (8,5,2)(8,7,9) winning conditions
+                i.e., if (7,9)(2,5) is equal then the computer plays at position 8 */
+                case 8:
+                    if( (board[7] == compChoice && board[9] == compChoice)
+                            || (board[2] == compChoice && board[5] == compChoice) ) {
+                        board[i] = compChoice;
+                        win = false;
+                    }
+                    break;
+                /* Case:9 (9,5,1)(7,8,9)(9,6,3) winning conditions
+                i.e., if (6,3)(8,7)(1,5) is equal then the computer plays at position 9 */
+                case 9:
+                    if( (board[8] == compChoice && board[7] == compChoice)
+                            || (board[6] == compChoice && board[3] == compChoice)
+                            || (board[5] == compChoice && board[1] == compChoice) ) {
+                        board[i] = compChoice;
+                        win = false;
+                    }
+                    break;
+            }
+        }
+        /* If the win is not false from the above winning conditions then go for random
+        to generate computer to move position */
+
+		while (win) {
 			int random = (int)(Math.floor(Math.random() * 10) % 9)+1;
-			if (board[random] == ' ') {
-				board[random] = compChoice;
-				break;
-			}
-			else
-				continue;
+				if (board[random] == ' ') {
+					board[random] = compChoice;
+					break;
+				}
+				else
+					continue;
 		}
 	}
 
@@ -131,6 +228,14 @@ public class TicTacToe {
                 return null;
             }
         }
+        }
+        /* In case of No-Winner the e check for anu any empty cells in the board, if they are present we
+        return null else we return the game is a draw */
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == ' ') {
+                return null;
+            }
+        }
         return "draw";
     }
 
@@ -146,6 +251,13 @@ public class TicTacToe {
             System.exit(0);
         }
     }
+	public static void main(String[] args) {
+		String winner = null;
+		createBoard();
+		playerChoice();
+		displayBoard();
+		boolean turn = toss();
+    
 	public static void main(String[] args) {
 		String winner = null;
         if (turn){
@@ -173,6 +285,7 @@ public class TicTacToe {
                 winner = checkWinner();
                 printWinner(winner);
             }
-        }
-	  }
+
+        }		
+     }
 }
