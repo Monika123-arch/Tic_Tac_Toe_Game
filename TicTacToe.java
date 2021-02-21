@@ -1,6 +1,5 @@
 import java.util.*;
 public class TicTacToe {
-	
 	//Static Variables
 	public static char[] board = new char[10];
 	public static char userChoice, compChoice; 	
@@ -12,7 +11,6 @@ public class TicTacToe {
 			board[i] = ' ';
 		}
 	}
-
 	//playerChoice() method to choose User's and Computer's choice of X and O
 	public static void playerChoice() {
 		Scanner sc = new Scanner(System.in);
@@ -148,15 +146,8 @@ public class TicTacToe {
             System.exit(0);
         }
     }
-
-
-
 	public static void main(String[] args) {
 		String winner = null;
-		createBoard();
-		playerChoice();
-		displayBoard();
-		boolean turn = toss();
         if (turn){
             while (winner == null) {
                 playerMove();
@@ -182,6 +173,6 @@ public class TicTacToe {
                 winner = checkWinner();
                 printWinner(winner);
             }
-        }		
-	}
+        }
+	  }
 }
