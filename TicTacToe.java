@@ -1,6 +1,5 @@
 import java.util.*;
 public class TicTacToe {
-	
 	//Static Variables
 	public static char[] board = new char[10];
 	public static char userChoice, compChoice; 	
@@ -158,7 +157,6 @@ public class TicTacToe {
                     break;
             }
         }
-
         if (win) {
             // Checking the opponent position whether it can win and stopping it by playing that position
             for (int i = 1; i < 10; i++) {
@@ -271,6 +269,7 @@ public class TicTacToe {
                 }
             }
         }
+
         /* If the win is not false from the above winning conditions then go for random
         to generate computer to move position */
 
@@ -335,6 +334,24 @@ public class TicTacToe {
             else if (line.equals("OOO")) {
                 return "O";
             }
+
+        }
+        /* In case of No-Winner the e check for anu any empty cells in the board, if they are present we
+        return null else we return the game is a draw */
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == ' ') {
+                return null;
+            }
+        }
+
+        }
+        /* In case of No-Winner the e check for anu any empty cells in the board, if they are present we
+        return null else we return the game is a draw */
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == ' ') {
+                return null;
+            }
+        }
         }
         /* In case of No-Winner the e check for anu any empty cells in the board, if they are present we
         return null else we return the game is a draw */
@@ -358,15 +375,14 @@ public class TicTacToe {
             System.exit(0);
         }
     }
-
-
-
 	public static void main(String[] args) {
 		String winner = null;
 		createBoard();
 		playerChoice();
 		displayBoard();
 		boolean turn = toss();
+	public static void main(String[] args) {
+		String winner = null;
         if (turn){
             while (winner == null) {
                 playerMove();
@@ -393,5 +409,6 @@ public class TicTacToe {
                 printWinner(winner);
             }
         }		
-	}
+
+        }		
 }
