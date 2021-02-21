@@ -51,13 +51,44 @@ public class TicTacToe {
 				System.out.println("Not a Valid Input");
 		}
 	}
+	//compMove() method to play move for a computer which takes position(1-9) by the use of random
+
+	public static void compMove() {
+		int random = (int)(Math.floor(Math.random() * 10) % 9)+1;
+		if (random > 0 && random < 10) {
+			if (board[random] == ' ') {
+				board[random] = userChoice;
+			}
+			else
+				System.out.println("Position filled");
+		}
+		else
+			System.out.println("Not a Valid Input");
+	}
+
+	public static boolean toss(){
+		int random = (int)Math.floor(Math.random() * 10) % 2;
+		if ( random == 0) {
+			System.out.println(userChoice + " will play first.");
+			return true;
+		}
+		else {
+			System.out.println(compChoice + " will play first.");
+			return false;
+		}
+	}
 	public static void main(String[] args) {
 		createBoard();
 		playerChoice();
 		displayBoard();
-		playerMove();
-		displayBoard();
-		playerMove();
-		displayBoard();
+		boolean turn = toss();
+		while (true) {
+			if (turn)
+				playerMove();
+			else 
+				compMove();
+			displayBoard();
+			break;
+		}
 	}
 }
