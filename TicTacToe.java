@@ -11,7 +11,6 @@ public class TicTacToe {
 			board[i] = ' ';
 		}
 	}
-
 	//playerChoice() method to choose User's and Computer's choice of X and O
 	public static void playerChoice() {
 		Scanner sc = new Scanner(System.in);
@@ -27,7 +26,6 @@ public class TicTacToe {
 		}
 		System.out.println("User: "+userChoice+"\nComputer: "+compChoice);
 	}
-
 	//displayBoard() method to print the  TicTacToe  Board
 	public static void displayBoard() {
 		System.out.println("  " + board[1] + " | "+ board[2] + " | " + board[3] + "  ");
@@ -36,7 +34,6 @@ public class TicTacToe {
 		System.out.println("--------------");
 		System.out.println("  " + board[7] + " | "+ board[8] + " | " + board[9] + "  ");
 	}
-
 	public static void main(String[] args) {
 		createBoard();
 		playerChoice();
